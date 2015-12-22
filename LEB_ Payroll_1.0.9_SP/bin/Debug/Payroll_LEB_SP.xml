@@ -1,0 +1,180 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Payroll_LEB_SP
+</name>
+</assembly>
+<members>
+<member name="P:Payroll_LEB_SP.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:Payroll_LEB_SP.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtHouseFile.HeaderDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtHouseFile.DetailsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtHouseFile.HeaderRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtHouseFile.DetailsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtHouseFile.HeaderRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtHouseFile.DetailsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtHouseFile">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.PayHeaderDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.EarningDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.LeaveDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.DeductionDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.PayHeaderRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.EarningRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.LeaveRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.DeductionRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.PayHeaderRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.EarningRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.LeaveRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll.DeductionRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.dtPayroll">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.EarningDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.DeductionsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.ContributionDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.LeaveDetailsDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.ProjectDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.EarAccrualDataTable">
+	<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.EarningRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.DeductionsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.ContributionRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.LeaveDetailsRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.ProjectRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.EarAccrualRow">
+	<summary>
+Represents strongly named DataRow class.
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.EarningRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.DeductionsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.ContributionRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.LeaveDetailsRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.ProjectRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet.EarAccrualRowChangeEvent">
+	<summary>
+Row event argument class
+</summary>
+</member><member name="T:Payroll_LEB_SP.Worksheet">
+	<summary>
+Represents a strongly typed in-memory cache of data.
+</summary>
+</member>
+</members>
+</doc>
