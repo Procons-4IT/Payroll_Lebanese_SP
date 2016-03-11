@@ -882,11 +882,13 @@ Public Class clsTicketTransactions
 
 #Region "Validate Grid details"
     Private Function validation(ByVal aGrid As SAPbouiCOM.Grid, ByVal aCompany As String) As Boolean
-        Dim strECode, strECode1, strEname, strEname1, strType, strMonth, strYear, strStartDate, strEndDate As String
+        Dim strECode, strECode1, strEname, strEname1, strType, strMonth, strYear, strStartDate, strEndDate, strTicketCode As String
+        Dim blnCheckRequire As Boolean = False
         For intRow As Integer = 0 To aGrid.DataTable.Rows.Count - 1
             strECode = aGrid.DataTable.GetValue("U_Z_EMPID", intRow)
 
             If strECode <> "" Then
+                blnCheckRequire = False
                 oComboColumn = aGrid.Columns.Item("U_Z_Month")
                 strMonth = oComboColumn.GetSelectedValue(intRow).Value
                 oComboColumn = aGrid.Columns.Item("U_Z_Year")
@@ -895,7 +897,10 @@ Public Class clsTicketTransactions
                     oApplication.Utilities.Message("Ticket code is missing..", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
                     aGrid.Columns.Item("U_Z_TktCode").Click(intRow)
                     Return False
+                Else
+                    strTicketCode = aGrid.DataTable.GetValue("U_Z_TktCode", intRow)
                 End If
+
                 If strMonth = "" Then
                     oApplication.Utilities.Message("Transaction Month is missing", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
                     Return False
@@ -906,7 +911,6 @@ Public Class clsTicketTransactions
                 End If
                 If strMonth <> "" And strYear <> "" Then
                     Dim strCompany As String = aCompany
-
                     Dim otest1 As SAPbobsCOM.Recordset
                     otest1 = oApplication.Company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset)
                     otest1.DoQuery("SElect * from [@Z_PAYROLL] where U_Z_MOnth=" & strMonth & " and U_Z_Year=" & strYear & " and U_Z_CompNo='" & strCompany & "'")
@@ -931,19 +935,29 @@ Public Class clsTicketTransactions
                         ' Return False
                     End If
                     Dim strtype1 As String
-
+                    otest1.DoQuery("Select isnull(U_Z_BalCheck,'N') from [@Z_PAY_AIR] where Code='" & strTicketCode & "'")
+                    If otest1.Fields.Item(0).Value = "Y" Then
+                        blnCheckRequire = True
+                    Else
+                        blnCheckRequire = False
+                    End If
                     Dim strEMpid As String = aGrid.DataTable.GetValue("U_Z_EMPID", intRow)
                     Dim dblRate, dblHours As Double
                     dblRate = oGrid.DataTable.GetValue("U_Z_NoofTkts", intRow)
                     dblHours = oGrid.DataTable.GetValue("U_Z_AmtperTkt", intRow)
                     dblRate = dblRate * dblHours
                     aGrid.DataTable.SetValue("U_Z_Amount", intRow, dblRate)
-
                     If aGrid.DataTable.GetValue("Code", intRow) = "" Then
                         If aGrid.DataTable.GetValue("U_Z_NoofTkts", intRow) > aGrid.DataTable.GetValue("U_Z_TktsBal", intRow) Then
-                            If oApplication.SBO_Application.MessageBox("No of tickets exceeds the available balanace. Do you want to continue ?", , "Continue", "Cancel") = 2 Then
+                            If blnCheckRequire = True Then
+                                oApplication.Utilities.Message("No of tickets exceeds the available balance", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
                                 aGrid.Columns.Item("U_Z_NoofTkts").Click(intRow, , 1)
                                 Return False
+                            Else
+                                If oApplication.SBO_Application.MessageBox("No of tickets exceeds the available balance. Do you want to continue ?", , "Continue", "Cancel") = 2 Then
+                                    aGrid.Columns.Item("U_Z_NoofTkts").Click(intRow, , 1)
+                                    Return False
+                                End If
                             End If
                         End If
                     End If

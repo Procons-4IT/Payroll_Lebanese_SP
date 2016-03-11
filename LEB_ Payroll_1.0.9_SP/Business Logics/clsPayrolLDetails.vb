@@ -285,7 +285,7 @@ Public Class clsPayrolLDetails
                 oGrid = aform.Items.Item("26").Specific
                 oApplication.Utilities.assignMatrixLineno(oGrid, aform)
                 strstring = "SELECT T0.[U_Z_Year] 'Year', T0.[U_Z_Monthname] 'Month', T0.[U_Z_Fraction] 'Fraction', T0.[U_Z_Basic] 'Basic',"
-                strstring = strstring & "   T0.[U_Z_EOSEarning] 'Earning', T0.[U_Z_EOSDeduction] 'Deduction',T0.[U_Z_LEAVEAMOUNT] 'Leave Deduction', T0.[U_Z_EOSAmount] 'Total EOS Eligble',"
+                strstring = strstring & "   T0.[U_Z_EOSEarning] 'Earning', T0.[U_Z_EOSDeduction] 'Deduction',T0.[U_Z_LEAVEAMOUNT] 'Leave Deduction',T0.[U_Z_CONAMOUNT] 'Contribution', T0.[U_Z_EOSAmount] 'Total EOS Eligble',"
                 strstring = strstring & "  T0.[U_Z_EOS] 'EOS Percentage', T0.[U_Z_EOSMonthAmount] 'Monthly EOS', T0.[U_Z_EOSYTD] 'YTD EOS',T0.[U_Z_EOSBalance] 'EOS Balance',T0.[U_Z_EOSAccPaid] 'Accumulated Contribution Paid to NSSF',T0.[U_Z_NoofYrs] 'Years on Experiance',T0.[U_Z_EOSProvision] 'EOS Provision' FROM [dbo].[@Z_PAY_NSSFEOS]  T0"
                 strstring = strstring & "  where T0.U_Z_Year=" & intyear & " and  T0.U_Z_EMPID='" & stEmpID & "'  order by U_Z_Year,U_Z_Month"
                 oGrid.DataTable.ExecuteQuery(strstring)

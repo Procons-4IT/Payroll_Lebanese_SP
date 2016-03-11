@@ -2162,22 +2162,6 @@ Public Class clsHRModule
             End If
             Dim ote As SAPbobsCOM.Recordset
             ote = oApplication.Company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset)
-            'Try
-            '    ote.DoQuery("Select * from OHEM where empID=" & strempid)
-            '    If ote.RecordCount <= 0 Then
-            '        aForm.Freeze(False)
-            '        Exit Sub
-
-            '    End If
-            'Catch ex As Exception
-            '    aForm.Freeze(False)
-            '    Exit Sub
-            'End Try
-         
-            If strempid <> "" Then
-                '      oApplication.Utilities.UpdateEmployeeLeavedetails_EMployee(strempid)
-            End If
-            ' aForm.Items.Item("fldLeave").Visible = False
             Select Case aChoice
                 Case "LOAD"
                     oGrid = aForm.Items.Item("grdEarning").Specific
@@ -2600,14 +2584,18 @@ Public Class clsHRModule
 
                     oGrid = aForm.Items.Item("grdDed").Specific
                     oGrid.DataTable = aForm.DataSources.DataTables.Item("dtDed")
-                    oGrid.DataTable.ExecuteQuery("SELECT T0.""Code"", T0.""Name"", T0.""U_Z_EmpID"", T0.""U_Z_DEDUC_TYPE"", T0.""U_Z_DEDUC_VALUE"", T0.""U_Z_StartDate"", T0.""U_Z_EndDate"", T0.""U_Z_GLACC"",T0.""U_Z_Remarks"",U_Z_CreatedBy,U_Z_CreationDate,U_Z_UpdateBy,U_Z_UpdateDate FROM ""@Z_PAY2""  T0 where ""U_Z_EmpID""='" & aCode & "'")
-                    oGrid.Columns.Item(3).Type = SAPbouiCOM.BoGridColumnType.gct_ComboBox
-                    oComboColumn = oGrid.Columns.Item(3)
-                    oGrid.Columns.Item(0).Visible = False
-                    oGrid.Columns.Item(1).Visible = False
-                    oGrid.Columns.Item(2).Visible = False
-                    oGrid.Columns.Item(3).TitleObject.Caption = "Deduction Type"
-                    oGrid.Columns.Item(4).TitleObject.Caption = "Value"
+                    oGrid.DataTable.ExecuteQuery("SELECT T0.""Code"", T0.""Name"", T0.""U_Z_EmpID"", T0.""U_Z_DEDUC_TYPE"", T0.""U_Z_DEDUC_VALUE"",T0.""U_Z_DefPer"" , T0.""U_Z_StartDate"", T0.""U_Z_EndDate"", T0.""U_Z_GLACC"",T0.""U_Z_Remarks"",U_Z_CreatedBy,U_Z_CreationDate,U_Z_UpdateBy,U_Z_UpdateDate FROM ""@Z_PAY2""  T0 where ""U_Z_EmpID""='" & aCode & "'")
+                    oGrid.Columns.Item("U_Z_DEDUC_TYPE").Type = SAPbouiCOM.BoGridColumnType.gct_ComboBox
+                    oComboColumn = oGrid.Columns.Item("U_Z_DEDUC_TYPE")
+                    oGrid.Columns.Item("Code").Visible = False
+                    oGrid.Columns.Item("Name").Visible = False
+                    oGrid.Columns.Item("U_Z_EmpID").Visible = False
+                    oGrid.Columns.Item("U_Z_DEDUC_TYPE").TitleObject.Caption = "Deduction Type"
+                    oGrid.Columns.Item("U_Z_DEDUC_VALUE").TitleObject.Caption = "Value"
+                    oGrid.Columns.Item("U_Z_DEDUC_VALUE").TitleObject.Caption = "Value"
+                    oGrid.Columns.Item("U_Z_DefPer").TitleObject.Caption = "Percentage"
+                    oGrid.Columns.Item("U_Z_DefPer").Editable = True
+
                     oGrid.Columns.Item("U_Z_GLACC").TitleObject.Caption = "GLAccount"
                     oGrid.Columns.Item("U_Z_StartDate").TitleObject.Caption = "Start Date"
                     oGrid.Columns.Item("U_Z_EndDate").TitleObject.Caption = "End Date"
@@ -3214,32 +3202,23 @@ Public Class clsHRModule
             Next
 
 
-            oGrid = aForm.Items.Item("grdDed").Specific
-            'For intRow As Integer = 0 To oGrid.DataTable.Rows.Count - 1
-            '    oComboColumn = oGrid.Columns.Item(3)
-            '    Try
-            '        strType = oComboColumn.GetSelectedValue(intRow).Value
-            '    Catch ex As Exception
-            '        strType = ""
-            '    End Try
-
-            '    If strType <> "" Then
-            '        For intLoop As Integer = intRow To oGrid.DataTable.Rows.Count - 1
-            '            oComboColumn1 = oGrid.Columns.Item(3)
-            '            Try
-            '                strType1 = oComboColumn1.GetSelectedValue(intLoop).Value
-            '            Catch ex As Exception
-            '                strType1 = ""
-            '            End Try
-            '            If intRow <> intLoop And strType = strType1 Then
-            '                ' oApplication.Utilities.Message("Deduction code already selected", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
-            '                ' oGrid.Columns.Item(3).Click(intLoop)
-            '                '  Return False
-            '            End If
-            '        Next
-
-            '    End If
-            'Next
+              oGrid = aForm.Items.Item("grdDed").Specific
+            For intRow As Integer = 0 To oGrid.DataTable.Rows.Count - 1
+                oComboColumn = oGrid.Columns.Item(3)
+                Try
+                    strType = oComboColumn.GetSelectedValue(intRow).Value
+                Catch ex As Exception
+                    strType = ""
+                End Try
+                If strType <> "" Then
+                    Dim dblAMount, dblPercentage As Double
+                    If oGrid.DataTable.GetValue("U_Z_DEDUC_VALUE", intRow) <> 0 And oGrid.DataTable.GetValue("U_Z_DefPer", intRow) <> 0 Then
+                        oApplication.Utilities.Message("Either Amount or Percentage only selected", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
+                        oGrid.Columns.Item("U_Z_DEDUC_VALUE").Click(intRow)
+                        Return False
+                    End If
+                End If
+            Next
 
             oGrid = aForm.Items.Item("grdCon").Specific
             For intRow As Integer = 0 To oGrid.DataTable.Rows.Count - 1
@@ -3621,6 +3600,7 @@ Public Class clsHRModule
                     oUserTable.UserFields.Fields.Item("U_Z_EMPID").Value = strEmpId
                     oUserTable.UserFields.Fields.Item("U_Z_DEDUC_TYPE").Value = strType
                     oUserTable.UserFields.Fields.Item("U_Z_DEDUC_VALUE").Value = dblValue
+                    oUserTable.UserFields.Fields.Item("U_Z_DefPer").Value = oGrid.DataTable.GetValue("U_Z_DefPer", intRow)
                     '  oUserTable.UserFields.Fields.Item("U_Z_GLACC").Value = GLCODE("[@Z_PAY_ODED]", "Code", strType, "U_Z_DED_GLACC") ' oGrid.DataTable.GetValue(5, intRow)
                     If oGrid.DataTable.GetValue("U_Z_GLACC", intRow) = "" Then
                         oUserTable.UserFields.Fields.Item("U_Z_GLACC").Value = GLCODE("[@Z_PAY_ODED]", "Code", strType, "U_Z_DED_GLACC") 'oGrid.DataTable.GetValue(5, intRow)
@@ -3652,6 +3632,7 @@ Public Class clsHRModule
                     oUserTable.UserFields.Fields.Item("U_Z_EMPID").Value = strEmpId
                     oUserTable.UserFields.Fields.Item("U_Z_DEDUC_TYPE").Value = strType
                     oUserTable.UserFields.Fields.Item("U_Z_DEDUC_VALUE").Value = dblValue
+                    oUserTable.UserFields.Fields.Item("U_Z_DefPer").Value = oGrid.DataTable.GetValue("U_Z_DefPer", intRow)
                     ' oUserTable.UserFields.Fields.Item("U_Z_GLACC").Value = GLCODE("[@Z_PAY_ODED]", "Code", strType, "U_Z_DED_GLACC") ' oGrid.DataTable.GetValue(5, intRow)
                     If oGrid.DataTable.GetValue("U_Z_GLACC", intRow) = "" Then
                         oUserTable.UserFields.Fields.Item("U_Z_GLACC").Value = GLCODE("[@Z_PAY_ODED]", "Code", strType, "U_Z_DED_GLACC") 'oGrid.DataTable.GetValue(5, intRow)
@@ -4484,6 +4465,8 @@ Public Class clsHRModule
                                         otest.DoQuery("Select * from [@Z_PAY_ODED] where CODE='" & strCode & "'")
                                         oGrid.DataTable.SetValue("U_Z_GLACC", pVal.Row, otest.Fields.Item("U_Z_DED_GLACC").Value)
                                         oGrid.DataTable.SetValue("U_Z_DEDUC_VALUE", pVal.Row, otest.Fields.Item("U_Z_DefAmt").Value)
+                                        oGrid.DataTable.SetValue("U_Z_DefPer", pVal.Row, otest.Fields.Item("U_Z_DefPer").Value)
+
                                         oForm.Freeze(False)
                                     End If
                                 End If
@@ -4720,9 +4703,11 @@ Public Class clsHRModule
                                         End If
                                         oApplication.Utilities.setEdittextvalue(oForm, pVal.ItemUID, val)
                                     Else
-                                        If oCFL.ObjectType = "171" Then
-                                            val = oDataTable.GetValue("empID", 0)
-                                            LoadGridValues(oForm, "NAVIGATION", val)
+                                        If oForm.Mode = SAPbouiCOM.BoFormMode.fm_FIND_MODE And oCFL.ObjectType = "171" Then
+                                            If pVal.ItemUID <> "47" Then
+                                                val = oDataTable.GetValue("empID", 0)
+                                                LoadGridValues(oForm, "NAVIGATION", val)
+                                            End If
                                         End If
 
                                        

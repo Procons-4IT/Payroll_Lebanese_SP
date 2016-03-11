@@ -51,6 +51,16 @@ Public Class clsTax
         Next
         oForm.Items.Item("30").DisplayDesc = True
         oCombobox.Select(0, SAPbouiCOM.BoSearchKey.psk_Index)
+        oCombobox.ExpandType = SAPbouiCOM.BoExpandType.et_DescriptionOnly
+
+        oCombobox = oForm.Items.Item("32").Specific
+        oCombobox.ValidValues.Add("", "")
+        For intRow As Integer = 1 To 31
+            oCombobox.ValidValues.Add(intRow, intRow)
+        Next
+        oForm.Items.Item("32").DisplayDesc = True
+        oCombobox.Select(0, SAPbouiCOM.BoSearchKey.psk_Index)
+        oCombobox.ExpandType = SAPbouiCOM.BoExpandType.et_DescriptionOnly
 
         oMatrix = oForm.Items.Item("8").Specific
         oMatrix.SelectionMode = SAPbouiCOM.BoMatrixSelect.ms_Single

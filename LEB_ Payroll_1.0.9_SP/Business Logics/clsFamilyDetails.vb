@@ -75,7 +75,7 @@ Public Class clsFamilyDetails
             oGrid = aform.Items.Item("5").Specific
             dtTemp = oGrid.DataTable
             ' dtTemp.ExecuteQuery("Select * from [@Z_PAY_EMPFAMILY] where U_Z_EmpID='" & intCode & "' order by Code")
-            dtTemp.ExecuteQuery("SELECT T0.[Code], T0.[Name], T0.[U_Z_EmpID], T0.[U_Z_MemCode], T0.[U_Z_MemName], T0.[U_Z_Gender] , T0.[U_Z_DOB], T0.[U_Z_DOM], T0.[U_Z_STUD], T0.[U_Z_Emp], T0.[U_Z_Married], T0.[U_Z_DOJ], T0.[U_Z_DOT],T0.[U_Z_NSSF],T0.[U_Z_StopAllowance] FROM [dbo].[@Z_PAY_EMPFAMILY]  T0  where U_Z_EmpID='" & intCode & "' order by Code")
+            dtTemp.ExecuteQuery("SELECT T0.[Code], T0.[Name], T0.[U_Z_EmpID], T0.[U_Z_MemCode], T0.[U_Z_MemName], T0.[U_Z_Gender] , T0.[U_Z_DOB], T0.[U_Z_DOM], T0.[U_Z_STUD], T0.[U_Z_Emp], T0.[U_Z_Married], T0.[U_Z_DOJ], T0.[U_Z_DOT],T0.[U_Z_MRC] , T0.[U_Z_BCR],T0.[U_Z_INS],T0.[U_Z_NSSF],T0.[U_Z_StopAllowance] FROM [dbo].[@Z_PAY_EMPFAMILY]  T0  where U_Z_EmpID='" & intCode & "' order by Code")
 
             oGrid.DataTable = dtTemp
             Formatgrid(oGrid)
@@ -156,6 +156,14 @@ Public Class clsFamilyDetails
         agrid.Columns.Item("U_Z_StopAllowance").TitleObject.Caption = "Stop Allowance"
         agrid.Columns.Item("U_Z_StopAllowance").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
 
+        agrid.Columns.Item("U_Z_MRC").TitleObject.Caption = "Marriage Certificate Received"
+        agrid.Columns.Item("U_Z_MRC").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
+
+        agrid.Columns.Item("U_Z_BCR").TitleObject.Caption = "Birth Certificate Received"
+        agrid.Columns.Item("U_Z_BCR").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
+
+        agrid.Columns.Item("U_Z_INS").TitleObject.Caption = "Insurance"
+        agrid.Columns.Item("U_Z_INS").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
         agrid.AutoResizeColumns()
         agrid.SelectionMode = SAPbouiCOM.BoMatrixSelect.ms_Single
     End Sub
@@ -268,6 +276,36 @@ Public Class clsFamilyDetails
                     End If
 
                     oUserTable.UserFields.Fields.Item("U_Z_StopAllowance").Value = strNSSF
+
+
+                    OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_MRC")
+                    If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                        strNSSF = "Y"
+                    Else
+                        strNSSF = "N"
+                    End If
+
+                    oUserTable.UserFields.Fields.Item("U_Z_MRC").Value = strNSSF
+
+
+                    OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_BCR")
+                    If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                        strNSSF = "Y"
+                    Else
+                        strNSSF = "N"
+                    End If
+
+                    oUserTable.UserFields.Fields.Item("U_Z_BCR").Value = strNSSF
+
+                    OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_INS")
+                    If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                        strNSSF = "Y"
+                    Else
+                        strNSSF = "N"
+                    End If
+
+                    oUserTable.UserFields.Fields.Item("U_Z_INS").Value = strNSSF
+
                     If oUserTable.Add() <> 0 Then
                         oApplication.Utilities.Message(oApplication.Company.GetLastErrorDescription, SAPbouiCOM.BoStatusBarMessageType.smt_Error)
                         Committrans("Cancel")
@@ -346,6 +384,36 @@ Public Class clsFamilyDetails
                         End If
 
                         oUserTable.UserFields.Fields.Item("U_Z_StopAllowance").Value = strNSSF
+
+
+
+                        OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_MRC")
+                        If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                            strNSSF = "Y"
+                        Else
+                            strNSSF = "N"
+                        End If
+
+                        oUserTable.UserFields.Fields.Item("U_Z_MRC").Value = strNSSF
+
+
+                        OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_BCR")
+                        If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                            strNSSF = "Y"
+                        Else
+                            strNSSF = "N"
+                        End If
+
+                        oUserTable.UserFields.Fields.Item("U_Z_BCR").Value = strNSSF
+
+                        OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_INS")
+                        If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                            strNSSF = "Y"
+                        Else
+                            strNSSF = "N"
+                        End If
+
+                        oUserTable.UserFields.Fields.Item("U_Z_INS").Value = strNSSF
                         If oUserTable.Update() <> 0 Then
                             oApplication.Utilities.Message(oApplication.Company.GetLastErrorDescription, SAPbouiCOM.BoStatusBarMessageType.smt_Error)
                             Committrans("Cancel")

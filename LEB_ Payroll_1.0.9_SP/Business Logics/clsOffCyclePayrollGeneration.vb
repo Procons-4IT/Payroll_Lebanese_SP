@@ -206,6 +206,24 @@ Public Class clsOffCyclePayrollGeneration
             Else
                 strCompany = oCombobox.Selected.Value
             End If
+            If oApplication.Utilities.getEdittextvalue(aForm, "26") = "" Then
+                oApplication.Utilities.Message("Posting date is missing...", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
+                aForm.Freeze(False)
+                Return False
+            Else
+                Dim dt As Date = oApplication.Utilities.GetDateTimeValue(oApplication.Utilities.getEdittextvalue(aForm, "26"))
+                If Year(dt) = intYear And Month(dt) = intMonth Then
+
+                Else
+
+                    If oApplication.SBO_Application.MessageBox("Posting date is differ from selected year and month. Do you want to continue?", , "Yes", "No") = 2 Then
+                        aForm.Freeze(False)
+                        Return False
+                    End If
+                End If
+
+
+            End If
             '   oApplication.Utilities.UpdatePayrollTotal(intMonth, intYear)
             Dim oPayrec, oTempRec As SAPbobsCOM.Recordset
             oPayrec = oApplication.Company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset)
@@ -621,15 +639,8 @@ Public Class clsOffCyclePayrollGeneration
         oCombobox = aForm.Items.Item("cmbCmp").Specific
         If oCombobox.Selected.Value = "" Then
         End If
-        '  If oApplication.Utilities.PostJournalVoucher(aMonth, aYear, oCombobox.Selected.Value) = True Then
-        'If oApplication.Utilities.PostJournalVoucher_GroupbyBranch_OffCycle(aMonth, aYear, oCombobox.Selected.Value) = True Then
-        '    ' oTemp1.DoQuery("Update [@Z_PAYROLL] set U_Z_Process='Y'  where U_Z_CompNo='" & oCombobox.Selected.Value & "' and  U_Z_Year=" & aYear & " and U_Z_Month=" & aMonth & " and U_Z_Process='N'")
-        '    '  LoadPayRollDetails(aForm)
-        '    PrepareWorkSheet(oForm)
-        '    Return True
-        'Else
-        '    Return False
-        'End If
+      dtJEPostingdate = oApplication.Utilities.GetDateTimeValue(oApplication.Utilities.getEdittextvalue(aForm, "26"))
+
         Dim strJVSeries As String
         oTemp1.DoQuery("Select isnull(U_Z_PostType,'C'),isnull(U_Z_JVType,'V'),isnull(U_Z_DefSeries,'') 'Series' from [@Z_OADM] where U_Z_CompCode='" & oCombobox.Selected.Value & "'")
         If oTemp1.Fields.Item(1).Value = "V" Then

@@ -75,7 +75,7 @@ Public Class clsContribution
             aform.Freeze(True)
             oGrid = aform.Items.Item("5").Specific
             dtTemp = oGrid.DataTable
-            oGrid.DataTable.ExecuteQuery("Select   ""Code"",""Name"",""U_Z_FrgnName"",""U_Z_CON_GLACC"",""U_Z_CON_GLACC1"",""U_Z_PostType"",""U_Z_ExcPosting"" from [@Z_PAY_OCON] order by Code")
+            oGrid.DataTable.ExecuteQuery("Select   ""Code"",""Name"",""U_Z_FrgnName"",""U_Z_CON_GLACC"",""U_Z_CON_GLACC1"",""U_Z_PostType"",""U_Z_ExcPosting"",T0.""U_Z_SOCI_BENE"", T0.""U_Z_INCOM_TAX"",  T0.""U_Z_EOS"" from [@Z_PAY_OCON] T0 order by Code")
             ' oGrid.DataTable = dtTemp
             Formatgrid(oGrid)
             oApplication.Utilities.assignMatrixLineno(oGrid, aform)
@@ -112,6 +112,17 @@ Public Class clsContribution
         oEditTextColumn.LinkedObjectType = "1"
         agrid.Columns.Item("U_Z_ExcPosting").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
         agrid.Columns.Item("U_Z_ExcPosting").TitleObject.Caption = "Exclude from Posting"
+
+        agrid.Columns.Item("U_Z_SOCI_BENE").TitleObject.Caption = "Affect NSSF"
+        agrid.Columns.Item("U_Z_SOCI_BENE").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
+        agrid.Columns.Item("U_Z_SOCI_BENE").Visible = True
+        agrid.Columns.Item("U_Z_INCOM_TAX").TitleObject.Caption = "Affect Tax"
+        agrid.Columns.Item("U_Z_INCOM_TAX").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
+        agrid.Columns.Item("U_Z_INCOM_TAX").Visible = True
+        agrid.Columns.Item("U_Z_EOS").TitleObject.Caption = "Affect EOS "
+        agrid.Columns.Item("U_Z_EOS").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
+        agrid.Columns.Item("U_Z_EOS").Editable = True
+
 
         agrid.AutoResizeColumns()
         agrid.SelectionMode = SAPbouiCOM.BoMatrixSelect.ms_Single
@@ -189,6 +200,28 @@ Public Class clsContribution
                     Catch ex As Exception
                         oUserTable.UserFields.Fields.Item("U_Z_ExcPosting").Value = "N"
                     End Try
+
+                    oCheckBoxColumn = oGrid.Columns.Item("U_Z_EOS")
+                    If oCheckBoxColumn.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_EOS").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_EOS").Value = "N"
+                    End If
+
+                    oCheckBoxColumn = oGrid.Columns.Item("U_Z_SOCI_BENE")
+                    If oCheckBoxColumn.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_SOCI_BENE").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_SOCI_BENE").Value = "N"
+                    End If
+
+                    oCheckBoxColumn = oGrid.Columns.Item("U_Z_INCOM_TAX")
+                    If oCheckBoxColumn.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_INCOM_TAX").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_INCOM_TAX").Value = "N"
+                    End If
+
                     If oUserTable.Update <> 0 Then
                         oApplication.Utilities.Message(oApplication.Company.GetLastErrorDescription, SAPbouiCOM.BoStatusBarMessageType.smt_Error)
                         Return False
@@ -214,6 +247,27 @@ Public Class clsContribution
                     Catch ex As Exception
                         oUserTable.UserFields.Fields.Item("U_Z_ExcPosting").Value = "N"
                     End Try
+                    oCheckBoxColumn = oGrid.Columns.Item("U_Z_EOS")
+                    If oCheckBoxColumn.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_EOS").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_EOS").Value = "N"
+                    End If
+
+                    oCheckBoxColumn = oGrid.Columns.Item("U_Z_SOCI_BENE")
+                    If oCheckBoxColumn.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_SOCI_BENE").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_SOCI_BENE").Value = "N"
+                    End If
+
+                    oCheckBoxColumn = oGrid.Columns.Item("U_Z_INCOM_TAX")
+                    If oCheckBoxColumn.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_INCOM_TAX").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_INCOM_TAX").Value = "N"
+                    End If
+
                     If oUserTable.Add <> 0 Then
                         oApplication.Utilities.Message(oApplication.Company.GetLastErrorDescription, SAPbouiCOM.BoStatusBarMessageType.smt_Error)
                         Return False

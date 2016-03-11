@@ -343,8 +343,8 @@ Public Class clsoffToolPosting
                 Dim strEmpName As String
                 Dim strEmpID1, strMonth, strYear As String
                 For intRow As Integer = 0 To oPay1.RecordCount - 1
-                    strEmpID = oApplication.Utilities.getEmployeeRef(oPay1.Fields.Item(0).Value, oPay1.Fields.Item(1).Value, strRefCode)
-                    strEmpID1 = oApplication.Utilities.getEmpIDFromMaster(oPay1.Fields.Item(0).Value, oPay1.Fields.Item(1).Value) 'oPay1.Fields.Item("U_Z_EmpID").Value
+                    strEmpID = oApplication.Utilities.getEmployeeRef(oPay1.Fields.Item(0).Value, oPay1.Fields.Item(1).Value, strRefCode, oPay1.Fields.Item("Dim3").Value, oPay1.Fields.Item("Dim4").Value, oPay1.Fields.Item("Dim5").Value)
+                    strEmpID1 = oApplication.Utilities.getEmpIDFromMaster(oPay1.Fields.Item(0).Value, oPay1.Fields.Item(1).Value, oPay1.Fields.Item("Dim3").Value, oPay1.Fields.Item("Dim4").Value, oPay1.Fields.Item("Dim5").Value) 'oPay1.Fields.Item("U_Z_EmpID").Value
                     strMonth = aMonth.ToString
                     strYear = aYear.ToString
                     'strEmpID = getEmployeeRef_Employee(oPay1.Fields.Item(0).Value, oPay1.Fields.Item(1).Value, strRefCode, oPay1.Fields.Item("U_Z_EmpID").Value)
@@ -764,8 +764,8 @@ Public Class clsoffToolPosting
                 Dim strEmpName As String
                 Dim strEmpID1, strMonth, strYear As String
                 For intRow As Integer = 0 To oPay1.RecordCount - 1
-                    strEmpID = oApplication.Utilities.getEmployeeRef(oPay1.Fields.Item(0).Value, oPay1.Fields.Item(1).Value, strRefCode)
-                    strEmpID1 = oApplication.Utilities.getEmpIDFromMaster(oPay1.Fields.Item(0).Value, oPay1.Fields.Item(1).Value) 'oPay1.Fields.Item("U_Z_EmpID").Value
+                    strEmpID = oApplication.Utilities.getEmployeeRef(oPay1.Fields.Item(0).Value, oPay1.Fields.Item(1).Value, strRefCode, oPay1.Fields.Item("Dim3").Value, oPay1.Fields.Item("Dim4").Value, oPay1.Fields.Item("Dim5").Value)
+                    strEmpID1 = oApplication.Utilities.getEmpIDFromMaster(oPay1.Fields.Item(0).Value, oPay1.Fields.Item(1).Value, oPay1.Fields.Item("Dim3").Value, oPay1.Fields.Item("Dim4").Value, oPay1.Fields.Item("Dim5").Value) 'oPay1.Fields.Item("U_Z_EmpID").Value
                     strMonth = aMonth.ToString
                     strYear = aYear.ToString
                     'strEmpID = getEmployeeRef_Employee(oPay1.Fields.Item(0).Value, oPay1.Fields.Item(1).Value, strRefCode, oPay1.Fields.Item("U_Z_EmpID").Value)

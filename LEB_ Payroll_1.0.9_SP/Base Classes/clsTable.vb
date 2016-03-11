@@ -428,6 +428,7 @@ Public NotInheritable Class clsTable
 
             'Stop Family Allowance if the termination day is before particular day-2016-12-18
             AddFields("Z_PAY_TAX", "Z_SSDay", "Stop Family Allowance Day", SAPbobsCOM.BoFieldTypes.db_Numeric)
+            AddFields("Z_PAY_TAX", "Z_SJDay", "Allowance Stop Joing Day", SAPbobsCOM.BoFieldTypes.db_Numeric)
 
             'AddFields("Z_PAY_TAX", "Z_TaxGLAC", "Income Tax G/L Account", SAPbobsCOM.BoFieldTypes.db_Alpha, , 100)
             'AddFields("Z_PAY_TAX", "Z_FAGLAC", "Family allowance G/L Account", SAPbobsCOM.BoFieldTypes.db_Alpha, , 100)
@@ -449,7 +450,6 @@ Public NotInheritable Class clsTable
             'AddFields("Z_PAY_OFAM", "Z_Code", "Family Member Code", SAPbobsCOM.BoFieldTypes.db_Alpha, , 6)
             AddFields("Z_PAY_OFAM", "Z_Code", "Family Member Code", SAPbobsCOM.BoFieldTypes.db_Alpha, , 5)
             AddFields("Z_PAY_OFAM", "Z_Name", "Family Member Description", SAPbobsCOM.BoFieldTypes.db_Alpha, , 100)
-
 
 
             AddFields("Z_PAY_OEAR", "Z_CODE", "Allowance Code", SAPbobsCOM.BoFieldTypes.db_Alpha, )
@@ -492,6 +492,7 @@ Public NotInheritable Class clsTable
             addField("@Z_PAY_ODED", "Z_EOS", "EOS Applicable", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
             addField("@Z_PAY_ODED", "Z_PostType", "Posting Type", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "B,A", "Business Partner,GL Account", "A")
             addField("@Z_PAY_ODED", "Z_ProRate", "Prorated", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+            AddFields("Z_PAY_ODED", "Z_DefPer", "Default Percentage", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Percentage)
 
 
 
@@ -584,6 +585,7 @@ Public NotInheritable Class clsTable
             AddFields("Z_PAY2", "Z_EmpID", "Employee ID", SAPbobsCOM.BoFieldTypes.db_Alpha, , 10)
             AddFields("Z_PAY2", "Z_DEDUC_TYPE", " DEDUCTION TYPE", SAPbobsCOM.BoFieldTypes.db_Alpha, , 40)
             AddFields("Z_PAY2", "Z_DEDUC_VALUE", " DEDUCTION VALUE", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAY2", "Z_DefPer", "Default Percentage", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Percentage)
             AddFields("Z_PAY2", "Z_GLACC", "GL Account", SAPbobsCOM.BoFieldTypes.db_Alpha, , 100)
             AddFields("Z_PAY2", "Z_StartDate", "Start Date", SAPbobsCOM.BoFieldTypes.db_Date)
             AddFields("Z_PAY2", "Z_EndDate", "End Date", SAPbobsCOM.BoFieldTypes.db_Date)
@@ -1382,6 +1384,7 @@ Public NotInheritable Class clsTable
             AddFields("Z_PAY_TRANS", "Z_Month", "Month", SAPbobsCOM.BoFieldTypes.db_Numeric)
             AddFields("Z_PAY_TRANS", "Z_Year", "Year", SAPbobsCOM.BoFieldTypes.db_Numeric)
             addField("@Z_PAY_TRANS", "Z_Posted", "Posted", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+            AddFields("Z_PAY_TRANS", "Z_DefPer", "Percentage", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Percentage)
 
             AddTables("Z_PAY_OVTMAP", "OverTime and Leave Mapping", SAPbobsCOM.BoUTBTableType.bott_NoObject)
             AddFields("Z_PAY_OVTMAP", "Z_CODE", "OverTime Code", SAPbobsCOM.BoFieldTypes.db_Alpha, , 20)
@@ -2291,6 +2294,7 @@ Public NotInheritable Class clsTable
 
             AddFields("Z_PAY_AIR", "Z_GLACC", "GL Account", SAPbobsCOM.BoFieldTypes.db_Alpha, , 100)
             AddFields("Z_PAY_AIR", "Z_AmtperTkt", "Amount per Ticket", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Price)
+            addField("@Z_PAY_AIR", "Z_BalCheck", "Balance Check required", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
 
 
             AddTables("Z_PAY10", "Employee Airticket master", SAPbobsCOM.BoUTBTableType.bott_NoObject)
@@ -2587,6 +2591,23 @@ Public NotInheritable Class clsTable
             AddFields("Z_PAY21", "Z_Amount", "Increment Amount", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("Z_PAY21", "Z_InrAmt", "Consolidated Increment Amount", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
 
+            'new field 
+
+            AddFields("Z_PAY_INCOMETAX", "Z_DaysfrmSetup1", "Days from Setup", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Quantity)
+            AddFields("Z_PAY_NSSFEOS", "Z_DaysfrmSetup1", "Days from Setup", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Quantity)
+
+
+
+            addField("@Z_PAY_OCON", "Z_EOS", "Affect EOS", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+            addField("@Z_PAY_OCON", "Z_SOCI_BENE", "Affect NSSF", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+            addField("@Z_PAY_OCON", "Z_INCOM_TAX", "Affect Tax", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+            AddFields("Z_PAY_INCOMETAX", "Z_CONT", "Total Contribution", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAY_NSSFEOS", "Z_CONAMOUNT", "Total Contribution", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+
+            'enhancements in Family Member details -Navlinke 11-03-2016
+            addField("@Z_PAY_EMPFAMILY", "Z_MRC", "Marriage Certificate Received", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+            addField("@Z_PAY_EMPFAMILY", "Z_BCR", "Birth Certificate Received", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+            addField("@Z_PAY_EMPFAMILY", "Z_INS", "Insurance", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
 
             CreateUDO()
             oApplication.Utilities.Message("Initializing Database...", SAPbouiCOM.BoStatusBarMessageType.smt_Warning)
