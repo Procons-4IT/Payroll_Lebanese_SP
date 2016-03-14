@@ -361,3 +361,9 @@ G:\International Projects_SAP9.0\Procons-4IT\Payroll\Lebanese Payroll\Latest Pay
 G:\International Projects_SAP9.0\Procons-4IT\Payroll\Lebanese Payroll\Latest Payroll\Labenes Payroll_SP\20160311_Payroll_1.0.19_SP\obj\Debug\Payroll_LEB_SP.frmReportViewer.resources
 G:\International Projects_SAP9.0\Procons-4IT\Payroll\Lebanese Payroll\Latest Payroll\Labenes Payroll_SP\20160311_Payroll_1.0.19_SP\obj\Debug\Payroll_LEB_SP.Resources.resources
 G:\International Projects_SAP9.0\Procons-4IT\Payroll\Lebanese Payroll\Latest Payroll\Labenes Payroll_SP\20160311_Payroll_1.0.19_SP\obj\Debug\Payroll_LEB_SP.vbproj.GenerateResource.Cache
+F:\Procons_Github_Projects\Payroll_LEB_SP\LEB_ Payroll_1.0.9_SP\obj\Debug\Interop.SAPbobsCOM.dll
+F:\Procons_Github_Projects\Payroll_LEB_SP\LEB_ Payroll_1.0.9_SP\obj\Debug\Interop.SAPbouiCOM.dll
+F:\Procons_Github_Projects\Payroll_LEB_SP\LEB_ Payroll_1.0.9_SP\obj\Debug\Payroll_LEB_SP.vbproj.ResolveComReference.cache
+F:\Procons_Github_Projects\Payroll_LEB_SP\LEB_ Payroll_1.0.9_SP\obj\Debug\Payroll_LEB_SP.exe
+F:\Procons_Github_Projects\Payroll_LEB_SP\LEB_ Payroll_1.0.9_SP\obj\Debug\Payroll_LEB_SP.xml
+F:\Procons_Github_Projects\Payroll_LEB_SP\LEB_ Payroll_1.0.9_SP\obj\Debug\Payroll_LEB_SP.pdb

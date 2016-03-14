@@ -1,5 +1,5 @@
 Public NotInheritable Class clsTable
-
+    'Version 1.0.19
 #Region "Private Functions"
     '*************************************************************************************************************
     'Type               : Private Function
