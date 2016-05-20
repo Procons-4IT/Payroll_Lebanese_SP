@@ -45,7 +45,7 @@ Public Class clsTax
         oCombobox.Select(0, SAPbouiCOM.BoSearchKey.psk_Index)
 
         oCombobox = oForm.Items.Item("30").Specific
-        oCombobox.ValidValues.Add("", "")
+        oCombobox.ValidValues.Add("0", "")
         For intRow As Integer = 1 To 31
             oCombobox.ValidValues.Add(intRow, intRow)
         Next
@@ -54,7 +54,7 @@ Public Class clsTax
         oCombobox.ExpandType = SAPbouiCOM.BoExpandType.et_DescriptionOnly
 
         oCombobox = oForm.Items.Item("32").Specific
-        oCombobox.ValidValues.Add("", "")
+        oCombobox.ValidValues.Add("33", "")
         For intRow As Integer = 1 To 31
             oCombobox.ValidValues.Add(intRow, intRow)
         Next

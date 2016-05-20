@@ -3238,9 +3238,49 @@ Public Class clsHRModule
                             strType1 = ""
                         End Try
                         If intRow <> intLoop And strType = strType1 Then
-                            oApplication.Utilities.Message("Contribution code already selected", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
-                            oGrid.Columns.Item(3).Click(intLoop)
-                            Return False
+                            Dim dtstart1, dtEndDate1, dtStart2 As DateTime
+                            Dim strDate1, strDate2, strDate3 As String
+                            strDate1 = oGrid.DataTable.GetValue("U_Z_StartDate", intRow)
+                            If strDate1 <> "" Then
+                                dtstart1 = oGrid.DataTable.GetValue("U_Z_StartDate", intRow)
+                            Else
+                                strDate1 = ""
+                            End If
+                            strDate2 = oGrid.DataTable.GetValue("U_Z_EndDate", intRow)
+                            If strDate2 <> "" Then
+                                dtEndDate1 = oGrid.DataTable.GetValue("U_Z_EndDate", intRow)
+                            Else
+                                strDate2 = ""
+                            End If
+                            strDate3 = oGrid.DataTable.GetValue("U_Z_StartDate", intLoop)
+                            If strDate3 <> "" Then
+                                dtStart2 = oGrid.DataTable.GetValue("U_Z_EndDate", intRow)
+                            Else
+                                strDate3 = ""
+                            End If
+
+                            If strDate1 <> "" And strDate3 <> "" Then
+                                If strDate2 = "" Then
+                                    oApplication.Utilities.Message("Contribution End Date is missing....", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
+                                    oGrid.Columns.Item(3).Click(intRow)
+                                    Return False
+                                End If
+                                If dtstart1 >= dtStart2 Then
+                                    oApplication.Utilities.Message("Contribution Start Date should be greater than previous date", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
+                                    oGrid.Columns.Item(3).Click(intLoop)
+                                    Return False
+                                End If
+                            ElseIf strDate1 <> "" And strDate3 = "" Then
+                                oApplication.Utilities.Message("Contribution  Start Date is missing", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
+                                oGrid.Columns.Item(3).Click(intLoop)
+                                Return False
+                            ElseIf strDate1 = "" And strDate3 = "" Then
+                                oApplication.Utilities.Message("Contribution code already selected", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
+                                oGrid.Columns.Item(3).Click(intLoop)
+                                Return False
+                            End If
+
+                           
                         End If
                     Next
 
@@ -3679,10 +3719,10 @@ Public Class clsHRModule
                 strEnddate = oGrid.DataTable.GetValue("U_Z_EndDate", intRow)
                 oComboColumn = oGrid.Columns.Item("U_Z_CONTR_TYPE")
                 strType = oComboColumn.GetSelectedValue(intRow).Value
-                oValidateRS.DoQuery("Select * from [@Z_PAY3] where U_Z_CONTR_TYPE='" & strType & "' and U_Z_EMPID='" & strEmpId & "'")
-                If oValidateRS.RecordCount > 0 Then
-                    strCode = oValidateRS.Fields.Item("Code").Value
-                End If
+                'oValidateRS.DoQuery("Select * from [@Z_PAY3] where U_Z_CONTR_TYPE='" & strType & "' and U_Z_EMPID='" & strEmpId & "'")
+                'If oValidateRS.RecordCount > 0 Then
+                '    strCode = oValidateRS.Fields.Item("Code").Value
+                'End If
                 dblValue = oGrid.DataTable.GetValue("U_Z_CONTR_VALUE", intRow)
                 If oUserTable.GetByKey(strCode) Then
                     oUserTable.Code = strCode

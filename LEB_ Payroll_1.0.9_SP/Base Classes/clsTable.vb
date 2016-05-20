@@ -1,5 +1,5 @@
 Public NotInheritable Class clsTable
-    'Version 1.0.19
+
 #Region "Private Functions"
     '*************************************************************************************************************
     'Type               : Private Function
@@ -405,6 +405,9 @@ Public NotInheritable Class clsTable
             AddFields("Z_PAY_OOVT", "Z_OVTRATE", "OVERTIME RATE", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Rate)
             addField("@Z_PAY_OOVT", "Z_OVTTYPE", "Over Time Type", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "N,W,H", "Normal,WeekEnd,Holiday", "N")
             AddFields("Z_PAY_OOVT", "Z_GLACC", "Deduction G/L Account", SAPbobsCOM.BoFieldTypes.db_Alpha, , 20)
+            addField("@Z_PAY_OOVT", "Z_SOCI_BENE", "Under Social Security", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+            addField("@Z_PAY_OOVT", "Z_INCOM_TAX", "Taxable", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+            addField("@Z_PAY_OOVT", "Z_EOS", "Affects EOS", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
 
 
             '   oApplication.Utilities.Message("Initializing Database...", SAPbouiCOM.BoStatusBarMessageType.smt_Warning)
@@ -2073,7 +2076,10 @@ Public NotInheritable Class clsTable
             AddFields("Z_PAY_INCOMETAX", "Z_MonthTaxAmount", "Monthly Tax Amount", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("Z_PAY_INCOMETAX", "Z_YTDTax", "YTD Tax", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("Z_PAY_INCOMETAX", "Z_GLAcc", "InCome tax GL Account", SAPbobsCOM.BoFieldTypes.db_Alpha, , 100)
-            AddFields("Z_PAY_INCOMETAX", "Z_MonthExm", "Monthly Exemptions", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAY_INCOMETAX", "Z_MonthExm", "Yearly Exemptions", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+
+            AddFields("Z_PAY_INCOMETAX", "Z_MonthExm1", "Monthly Exemptions", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAY_INCOMETAX", "Z_MTaxAmount", "Monthly Taxable Income", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
 
             'AddFields("Z_PAY_INCOMETAX", "Z_NSSFEarning", "NSSF Earning", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             'AddFields("Z_PAY_INCOMETAX", "Z_NSSFDeduction", "NSSF Deduction", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
@@ -2608,6 +2614,18 @@ Public NotInheritable Class clsTable
             addField("@Z_PAY_EMPFAMILY", "Z_MRC", "Marriage Certificate Received", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
             addField("@Z_PAY_EMPFAMILY", "Z_BCR", "Birth Certificate Received", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
             addField("@Z_PAY_EMPFAMILY", "Z_INS", "Insurance", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+
+
+            AddFields("Z_PAY_LOAN", "Z_FrgnName", "Second Language Name", SAPbobsCOM.BoFieldTypes.db_Alpha, , 200)
+
+            addField("@Z_PAY_TAX", "Z_TaxPro", "Prorated Tax Exemption", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+
+            'field additions 2016-05-20
+            AddFields("Z_PAYROLL1", "Z_FEarning", "Fixed Earnings", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAYROLL1", "Z_VEarning", "Variable Earnings", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAYROLL1", "Z_AAllowance", "Accrued Allowances", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAYROLL1", "Z_TDeduction", "Taxable Deductions", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            ' AddFields("Z_PAYROLL1", "Z_TDeduction", "Taxable Deductions", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
 
             CreateUDO()
             oApplication.Utilities.Message("Initializing Database...", SAPbouiCOM.BoStatusBarMessageType.smt_Warning)

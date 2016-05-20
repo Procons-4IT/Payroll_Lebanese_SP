@@ -265,7 +265,7 @@ Public Class clsPayrolLDetails
                 Dim stEmpID As String = oTemp1.Fields.Item("U_Z_EMPID").Value
                 oGrid = aform.Items.Item("grdTax").Specific 'TAX
                 Dim strstring As String
-                strstring = "SELECT  T0.[U_Z_Year] 'Year', T0.[U_Z_Monthname] 'Month', T0.[U_Z_Fraction] 'Fraction of Month', T0.[U_Z_CURMTHTAX] ' Current Month Taxable',T0.[U_Z_CURMTHCUM] 'Current Month Cummulative',T0.[U_Z_Basic] 'Basic Salary', T0.[U_Z_TaxAmount] 'Taxable Amount',T0.[U_Z_12MNetTax] 'Projected 12M Net Taxable Inc',T0.[U_Z_MonthExm] 'Monthly Exemption Amount', T0.[U_Z_MonthTax] 'Projected 12M taxable Amount',   T0.[U_Z_AnnualTax] 'Yearly Tax',T0.[U_Z_MonthTaxAmount] 'Monthly tax', T0.[U_Z_YTDTax] 'YTD Tax' "
+                strstring = "SELECT  T0.[U_Z_Year] 'Year', T0.[U_Z_Monthname] 'Month', T0.[U_Z_Fraction] 'Fraction of Month', T0.[U_Z_CURMTHTAX] ' Current Month Taxable Salary',T0.[U_Z_CURMTHCUM] 'Cummulative Taxable Salary',T0.[U_Z_Basic] 'Actual Basic Salary', T0.[U_Z_TaxAmount] 'Actual Cummulative Basic Salary', T0.[U_Z_MonthExm1] 'Monthly Exemption' ,T0.[U_Z_MTaxAmount] 'Monthly Taxable Amount',T0.[U_Z_12MNetTax] 'Projected 12M Net Taxable Inc',T0.[U_Z_MonthExm] 'Yearly Exemption Amount', T0.[U_Z_MonthTax] 'Projected 12M taxable Amount',   T0.[U_Z_AnnualTax] 'Yearly Tax',T0.[U_Z_MonthTaxAmount] 'Monthly tax', T0.[U_Z_YTDTax] 'YTD Tax' "
                 strstring = strstring & " FROM [dbo].[@Z_PAY_INCOMETAX]  T0 where T0.U_Z_Year=" & intyear & " and  T0.U_Z_EMPID='" & streempid & "' order by U_Z_Year,U_Z_Month"
                 oGrid.DataTable.ExecuteQuery(strstring)
                 oGrid.AutoResizeColumns()

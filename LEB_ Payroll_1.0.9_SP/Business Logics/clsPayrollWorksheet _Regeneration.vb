@@ -364,7 +364,7 @@ Public Class clsPayrollWorksheet_Regeneration
                 If 1 = 1 Then
                     '  strsql = "SELECT T0.[Code], T0.[Name], T0.[U_Z_RefCode], T0.[U_Z_PersonalID], T0.[U_Z_TANO] 'TANO',T0.[U_Z_empid], T0.[U_Z_EmpName], T0.[U_Z_JobTitle], T0.[U_Z_Department], T0.[U_Z_TermName] 'Contract Term', T0.[U_Z_Basic], T0.[U_Z_InrAmt], T0.[U_Z_BasicSalary], T0.[U_Z_MonthlyBasic],T0.[U_Z_SalaryType], T0.[U_Z_CostCentre], T0.[U_Z_Earning], T0.[U_Z_Deduction], T0.[U_Z_UnPaidLeave], T0.[U_Z_PaidLeave], T0.[U_Z_AnuLeave], T0.[U_Z_Contri], T0.[U_Z_AirAmt], ""U_Z_NetPayAmt"",""U_Z_CmpPayAmt"", T0.[U_Z_AcrAmt] ,T0.[U_Z_AcrAirAmt], T0.[U_Z_Cost], T0.[U_Z_NetSalary], T0.[U_Z_Startdate], T0.[U_Z_TermDate], T0.[U_Z_JVNo], T0.[U_Z_EOSYTD] ,T0.[U_Z_EOSBalance],T0.[U_Z_EOS], T0.[U_Z_CompNo], T0.[U_Z_Branch], T0.[U_Z_Dept],T0.""U_Z_EOS1"",T0.""U_Z_Leave"",T0.""U_Z_Ticket"",T0.""U_Z_Saving"",T0.""U_Z_PaidExtraSalary"" FROM [dbo].[@Z_PAYROLL1]  T0 where T0.U_Z_RefCode='" & strrefcode & "'"
 
-                    strsql = "SELECT T0.[Code], T0.[Name],T0.[U_Z_TANO] 'TANO',T0.[U_Z_empid], T0.[U_Z_EmpName], Case T0.""U_Z_OnHold"" when 'H' then 'On Hold' else 'Active' end ""Status"", T0.[U_Z_Basic], T0.[U_Z_InrAmt], T0.[U_Z_BasicSalary], T0.[U_Z_MonthlyBasic],T0.[U_Z_Cost], T0.[U_Z_NetSalary],T0.[U_Z_Earning], T0.[U_Z_Deduction], T0.[U_Z_UnPaidLeave], T0.[U_Z_PaidLeave], T0.[U_Z_AnuLeave],T0.""U_Z_CashOutAmt"", T0.[U_Z_Contri], T0.[U_Z_AirAmt], ""U_Z_NetPayAmt"",""U_Z_CmpPayAmt"", T0.[U_Z_AcrAmt] ,T0.[U_Z_AcrAirAmt], T0.[U_Z_EOSYTD] ,T0.[U_Z_EOSBalance],T0.[U_Z_EOS],T0.[U_Z_InComeTax],T0.[U_Z_FAAmount],T0.[U_Z_MEAmount],T0.[U_Z_MEEAmount], T0.[U_Z_SpouseRebate] ,T0.[U_Z_ChileRebate] ,T0.[U_Z_RefCode], T0.[U_Z_PersonalID],  T0.[U_Z_JobTitle], T0.[U_Z_Department],T0.[U_Z_EmpBranch], T0.[U_Z_TermName] 'Contract Term', T0.[U_Z_SalaryType], T0.[U_Z_CostCentre],  T0.[U_Z_Startdate], T0.[U_Z_TermDate], T0.[U_Z_JVNo],  T0.[U_Z_CompNo], T0.[U_Z_Branch], T0.[U_Z_Dept],T0.""U_Z_EOS1"",T0.""U_Z_Leave"",T0.""U_Z_Ticket"",T0.""U_Z_Saving"",T0.""U_Z_PaidExtraSalary"",T0.""U_Z_GOVAMT"" 'Social Gov.Amt' FROM [dbo].[@Z_PAYROLL1]  T0  where " & strEmpSelection & " and  T0.U_Z_RefCode='" & strrefcode & "' order by T0.[U_Z_empid]"
+                    strsql = "SELECT T0.[Code], T0.[Name],T0.[U_Z_TANO] 'TANO',T0.[U_Z_empid], T0.[U_Z_EmpName], Case T0.""U_Z_OnHold"" when 'H' then 'On Hold' else 'Active' end ""Status"", T0.[U_Z_Basic], T0.[U_Z_InrAmt], T0.[U_Z_BasicSalary], T0.[U_Z_MonthlyBasic],T0.[U_Z_Cost], T0.[U_Z_NetSalary],T0.[U_Z_FEarning] 'Fixed Earnings',T0.[U_Z_VEarning] 'Variable Earnings', T0.[U_Z_AAllowance] 'Accrued Allowance',T0.[U_Z_Earning],T0.[U_Z_TDeduction] 'Taxable Deductions', T0.[U_Z_Deduction], T0.[U_Z_UnPaidLeave], T0.[U_Z_PaidLeave], T0.[U_Z_AnuLeave],T0.""U_Z_CashOutAmt"", T0.[U_Z_Contri], T0.[U_Z_AirAmt], ""U_Z_NetPayAmt"",""U_Z_CmpPayAmt"", T0.[U_Z_AcrAmt] ,T0.[U_Z_AcrAirAmt], T0.[U_Z_EOSYTD] ,T0.[U_Z_EOSBalance],T0.[U_Z_EOS],T0.[U_Z_InComeTax],T0.[U_Z_FAAmount],T0.[U_Z_MEAmount],T0.[U_Z_MEEAmount], T0.[U_Z_SpouseRebate] ,T0.[U_Z_ChileRebate] ,T0.[U_Z_RefCode], T0.[U_Z_PersonalID],  T0.[U_Z_JobTitle], T0.[U_Z_Department],T0.[U_Z_EmpBranch], T0.[U_Z_TermName] 'Contract Term', T0.[U_Z_SalaryType], T0.[U_Z_CostCentre],  T0.[U_Z_Startdate], T0.[U_Z_TermDate], T0.[U_Z_JVNo],  T0.[U_Z_CompNo], T0.[U_Z_Branch], T0.[U_Z_Dept],T0.""U_Z_EOS1"",T0.""U_Z_Leave"",T0.""U_Z_Ticket"",T0.""U_Z_Saving"",T0.""U_Z_PaidExtraSalary"",T0.""U_Z_GOVAMT"" 'Social Gov.Amt' FROM [dbo].[@Z_PAYROLL1]  T0  where " & strEmpSelection & " and  T0.U_Z_RefCode='" & strrefcode & "' order by T0.[U_Z_empid]"
                     oGrid.DataTable.ExecuteQuery(strsql)
                     Formatgrid(oGrid, "Payroll")
                     oApplication.Utilities.assignMatrixLineno(oGrid, aForm)
@@ -3824,6 +3824,31 @@ Public Class clsPayrollWorksheet_Regeneration
                     '    dim dblAmt as Double =
                     oUserTable11.UserFields.Fields.Item("U_Z_ExSalCL").Value = oTempRec1.Fields.Item("U_Z_ExSalCL").Value - dblEOSEarning
 
+
+                    'Fixed Earnings
+                    otemp2.DoQuery("Select Sum(U_Z_Amount) from [@Z_PAYROLL2] where ""U_Z_Type""='D'  and  U_Z_RefCode='" & strPayrollRefNo & "'")
+                    dblEOSEarning = otemp2.Fields.Item(0).Value
+                    oUserTable11.UserFields.Fields.Item("U_Z_FEarning").Value = dblEOSEarning
+
+                    'Variable Earnings
+                    otemp2.DoQuery("Select Sum(U_Z_Amount) from [@Z_PAYROLL2] where ""U_Z_Type""='F' and  U_Z_RefCode='" & strPayrollRefNo & "'")
+                    dblEOSEarning = otemp2.Fields.Item(0).Value
+                    oUserTable11.UserFields.Fields.Item("U_Z_VEarning").Value = dblEOSEarning
+
+                    'Accrued Earnings
+                    otemp2.DoQuery("Select Sum(U_Z_Amount) from [@Z_PAYROLL22] where  U_Z_RefCode='" & strPayrollRefNo & "'")
+                    dblEOSEarning = otemp2.Fields.Item(0).Value
+                    oUserTable11.UserFields.Fields.Item("U_Z_AAllowance").Value = dblEOSEarning
+
+                    'taxable Deductions
+
+                    stTemp = "Select CODE from [@Z_PAY_ODED] where  isnull(U_Z_INCOM_TAX,'N')='Y'"
+                    otemp2.DoQuery("Select Sum(U_Z_Amount) from [@Z_PAYROLL3] where U_Z_Field in (" & stTemp & ") and  U_Z_RefCode='" & strPayrollRefNo & "'")
+                    otemp3.DoQuery(stTemp)
+                    dblEOSEarning = otemp2.Fields.Item(0).Value
+                    oUserTable11.UserFields.Fields.Item("U_Z_TDeduction").Value = dblEOSEarning
+
+
                     If blnExtrPosting = False Then
                         otemp2.DoQuery("Update ""@Z_PAYROLL2"" set  U_Z_Amount=0,U_Z_Value=0  where U_Z_Field ='EXSAL' and  U_Z_RefCode='" & strPayrollRefNo & "'")
                     End If
@@ -4899,11 +4924,20 @@ Public Class clsPayrollWorksheet_Regeneration
         '    oApplication.Company.EndTransaction(SAPbobsCOM.BoWfTransOpt.wf_Commit)
         'End If
         'oApplication.Company.StartTransaction()
+        Dim dtPayStartDate, dtJoiningDate As Date
+        Dim dblWorkingdays, dblCalenderDays As Double
+        Dim blnTerm As String
         If 1 = 1 Then
             strRefCode = arefCode
             oTempRec1.DoQuery("SELECT *,isnull(U_Z_DedType,'Y') 'DedInclude' from [@Z_PAYROLL1] where Code='" & arefCode & "'")
             oUserTable1 = oApplication.Company.UserTables.Item("Z_PAYROLL1")
             For intRow As Integer = 0 To oTempRec1.RecordCount - 1
+                dtJoiningDate = oTempRec1.Fields.Item("U_Z_StartDate").Value
+                blnTerm = oTempRec1.Fields.Item("U_Z_IsTerm").Value
+                dblCalenderDays = oTempRec1.Fields.Item("U_Z_CalenderDays").Value
+                dblWorkingdays = oTempRec1.Fields.Item("U_Z_WorkingDays").Value
+                '   dblWorkingdays = oTempRec1.Fields.Item("U_Z_WorkingDays1").Value
+
                 strPayrollRefNo = oTempRec1.Fields.Item("Code").Value
                 strempID = oTempRec1.Fields.Item("U_Z_empid").Value
                 If oTempRec1.Fields.Item("DedInclude").Value = "N" Then
@@ -4932,7 +4966,19 @@ Public Class clsPayrollWorksheet_Regeneration
                         ousertable2.UserFields.Fields.Item("U_Z_OBAmt").Value = otemp2.Fields.Item("U_Z_OBAmt").Value
                         ousertable2.UserFields.Fields.Item("U_Z_CM").Value = otemp2.Fields.Item("U_Z_Balance").Value
                         ousertable2.UserFields.Fields.Item("U_Z_CMAmt").Value = otemp2.Fields.Item("U_Z_BalAmount").Value
-                        ousertable2.UserFields.Fields.Item("U_Z_NoofDays").Value = otemp2.Fields.Item("U_Z_NoofDays").Value
+                        ' ousertable2.UserFields.Fields.Item("U_Z_NoofDays").Value = otemp2.Fields.Item("U_Z_NoofDays").Value
+
+                        Dim dblNoofDays1 As Double = otemp2.Fields.Item("U_Z_NoofDays").Value
+                        If dtJoiningDate.Year = ayear And dtJoiningDate.Month = aMonth Then
+                            blnTerm = "Y"
+                        End If
+                        If blnTerm = "Y" Then
+                            dblNoofDays1 = dblNoofDays1 / dblCalenderDays
+                            dblNoofDays1 = dblNoofDays1 * dblWorkingdays
+                        End If
+                        ousertable2.UserFields.Fields.Item("U_Z_NoofDays").Value = dblNoofDays1 ' otemp2.Fields.Item("U_Z_NoofDays").Value
+
+
                         'ousertable2.UserFields.Fields.Item("U_Z_CM").Value = otemp2.Fields.Item("U_Z_Balance").Value
                         'ousertable2.UserFields.Fields.Item("U_Z_NoofDays").Value = otemp2.Fields.Item("U_Z_NoofDays").Value
                         Dim oTest1 As SAPbobsCOM.Recordset

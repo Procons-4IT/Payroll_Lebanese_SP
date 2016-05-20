@@ -1958,6 +1958,18 @@ Public Class clsPayrollLeaveTransaction
 
                             Case SAPbouiCOM.BoEventTypes.et_DOUBLE_CLICK
                                 oForm = oApplication.SBO_Application.Forms.Item(FormUID)
+
+                                If pVal.ItemUID = "18" And pVal.ColUID = "U_Z_Attachment" Then
+                                    oGrid = oForm.Items.Item("18").Specific
+                                    Dim strPath As String = oGrid.DataTable.Columns.Item("U_Z_Attachment").Cells.Item(pVal.Row).Value.ToString()
+                                    FileOpen()
+                                    If strFilepath = "" Then
+                                        '  oApplication.Utilities.Message("Please Select a File", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
+                                        BubbleEvent = False
+                                    Else
+                                        oGrid.DataTable.Columns.Item("U_Z_Attachment").Cells.Item(pVal.Row).Value = strFilepath
+                                    End If
+                                End If
                                 If (pVal.ItemUID = "18" And pVal.ColUID = "U_Z_TrnsCode") Then
                                     Dim objChooseForm As SAPbouiCOM.Form
                                     Dim objChoose As New clsChooseFromList_Leave
@@ -2086,22 +2098,6 @@ Public Class clsPayrollLeaveTransaction
                                         End Try
                                     End If
                                 End If
-
-                            Case SAPbouiCOM.BoEventTypes.et_DOUBLE_CLICK
-                                If pVal.ItemUID = "18" And pVal.ColUID = "U_Z_Attachment" Then
-                                    oGrid = oForm.Items.Item("18").Specific
-                                    Dim strPath As String = oGrid.DataTable.Columns.Item("U_Z_Attachment").Cells.Item(pVal.Row).Value.ToString()
-                                    FileOpen()
-                                    If strFilepath = "" Then
-                                        '  oApplication.Utilities.Message("Please Select a File", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
-                                        BubbleEvent = False
-                                    Else
-                                        oGrid.DataTable.Columns.Item("U_Z_Attachment").Cells.Item(pVal.Row).Value = strFilepath
-                                    End If
-                                End If
-
-
-
 
 
                             Case SAPbouiCOM.BoEventTypes.et_ITEM_PRESSED

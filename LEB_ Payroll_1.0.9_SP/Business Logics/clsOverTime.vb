@@ -103,6 +103,17 @@ Public Class clsOverTime
         oEditTextColumn.LinkedObjectType = "1"
         agrid.Columns.Item("U_Z_MaxHours").TitleObject.Caption = "Overtime Hours Limit"
 
+        agrid.Columns.Item("U_Z_SOCI_BENE").TitleObject.Caption = "Affect NSSF Benefit"
+        agrid.Columns.Item("U_Z_SOCI_BENE").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
+        agrid.Columns.Item("U_Z_SOCI_BENE").Visible = True
+        agrid.Columns.Item("U_Z_INCOM_TAX").TitleObject.Caption = "Affect Taxable"
+        agrid.Columns.Item("U_Z_INCOM_TAX").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
+        agrid.Columns.Item("U_Z_INCOM_TAX").Visible = True
+
+        agrid.Columns.Item("U_Z_EOS").TitleObject.Caption = "Affect EOS "
+        agrid.Columns.Item("U_Z_EOS").Type = SAPbouiCOM.BoGridColumnType.gct_CheckBox
+        agrid.Columns.Item("U_Z_EOS").Editable = True
+
         agrid.AutoResizeColumns()
         agrid.SelectionMode = SAPbouiCOM.BoMatrixSelect.ms_Single
     End Sub
@@ -187,6 +198,7 @@ Public Class clsOverTime
         If validation(oGrid) = False Then
             Return False
         End If
+        Dim OCHECKBOXCOLUMN As SAPbouiCOM.CheckBoxColumn
         For intRow As Integer = 0 To oGrid.DataTable.Rows.Count - 1
             strCode = oApplication.Utilities.getMaxCode("@Z_PAY_OOVT", "Code")
             If oGrid.DataTable.GetValue(2, intRow) <> Nothing Or oGrid.DataTable.GetValue(3, intRow) <> Nothing Then
@@ -203,6 +215,26 @@ Public Class clsOverTime
                     oUserTable.UserFields.Fields.Item("U_Z_MaxHours").Value = oGrid.DataTable.GetValue("U_Z_MaxHours", intRow)
 
                     oUserTable.UserFields.Fields.Item("U_Z_GLACC").Value = oGrid.DataTable.GetValue("U_Z_GLACC", intRow)
+                    OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_EOS")
+                    If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_EOS").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_EOS").Value = "N"
+                    End If
+
+                    OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_INCOM_TAX")
+                    If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_INCOM_TAX").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_INCOM_TAX").Value = "N"
+                    End If
+
+                    OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_SOCI_BENE")
+                    If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_SOCI_BENE").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_SOCI_BENE").Value = "N"
+                    End If
 
                     If oUserTable.Update <> 0 Then
                         oApplication.Utilities.Message(oApplication.Company.GetLastErrorDescription, SAPbouiCOM.BoStatusBarMessageType.smt_Error)
@@ -215,8 +247,27 @@ Public Class clsOverTime
                     oUserTable.UserFields.Fields.Item("U_Z_OVTRATE").Value = (oGrid.DataTable.GetValue("U_Z_OVTRATE", intRow))
                     oUserTable.UserFields.Fields.Item("U_Z_OVTTYPE").Value = oGrid.DataTable.GetValue("U_Z_OVTTYPE", intRow)
                     oUserTable.UserFields.Fields.Item("U_Z_MaxHours").Value = oGrid.DataTable.GetValue("U_Z_MaxHours", intRow)
-
                     oUserTable.UserFields.Fields.Item("U_Z_GLACC").Value = oGrid.DataTable.GetValue("U_Z_GLACC", intRow)
+                    OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_EOS")
+                    If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_EOS").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_EOS").Value = "N"
+                    End If
+
+                    OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_INCOM_TAX")
+                    If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_INCOM_TAX").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_INCOM_TAX").Value = "N"
+                    End If
+
+                    OCHECKBOXCOLUMN = oGrid.Columns.Item("U_Z_SOCI_BENE")
+                    If OCHECKBOXCOLUMN.IsChecked(intRow) Then
+                        oUserTable.UserFields.Fields.Item("U_Z_SOCI_BENE").Value = "Y"
+                    Else
+                        oUserTable.UserFields.Fields.Item("U_Z_SOCI_BENE").Value = "N"
+                    End If
                     If oUserTable.Add <> 0 Then
                         oApplication.Utilities.Message(oApplication.Company.GetLastErrorDescription, SAPbouiCOM.BoStatusBarMessageType.smt_Error)
                         Return False

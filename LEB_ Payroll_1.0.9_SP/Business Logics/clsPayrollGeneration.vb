@@ -253,7 +253,7 @@ Public Class clsPayrollGeneration
                 If 1 = 1 Then
                     ' strsql = "Select * from [@Z_PAYROLL1] where U_Z_RefCode='" & strrefcode & "'"
                     ' strsql = "SELECT T0.[Code], T0.[Name], T0.[U_Z_RefCode], T0.[U_Z_PersonalID], T0.[U_Z_empid], T0.[U_Z_EmpName], T0.[U_Z_JobTitle], T0.[U_Z_Department], T0.[U_Z_Basic], T0.[U_Z_InrAmt], T0.[U_Z_BasicSalary], T0.[U_Z_SalaryType], T0.[U_Z_CostCentre], T0.[U_Z_Earning], T0.[U_Z_Deduction], T0.[U_Z_UnPaidLeave], T0.[U_Z_PaidLeave], T0.[U_Z_AnuLeave], T0.[U_Z_Contri], T0.[U_Z_Cost], T0.[U_Z_NetSalary], T0.[U_Z_Startdate], T0.[U_Z_TermDate], T0.[U_Z_JVNo], T0.[U_Z_EOS], T0.[U_Z_CompNo], T0.[U_Z_Branch], T0.[U_Z_Dept], T0.[U_Z_AirAmt], T0.[U_Z_AcrAmt] FROM [dbo].[@Z_PAYROLL1]  T0 where T0.U_Z_RefCode='" & strrefcode & "'"
-                    strsql = "SELECT T0.[Code], T0.[Name], T0.[U_Z_RefCode], T0.[U_Z_PersonalID], T0.[U_Z_TANO] 'TANO', T0.[U_Z_empid], T0.[U_Z_EmpName], Case T0.U_Z_OnHold when 'H' then 'On Hold' else 'Active' end 'Status', T0.[U_Z_JobTitle], T0.[U_Z_Department], T0.[U_Z_TermName] 'Contract Term',T0.[U_Z_Basic], T0.[U_Z_InrAmt], T0.[U_Z_BasicSalary],t0.U_Z_MonthlyBasic 'Monthly Basic', T0.[U_Z_SalaryType], T0.[U_Z_CostCentre], T0.[U_Z_Earning], T0.[U_Z_Deduction], T0.[U_Z_UnPaidLeave], T0.[U_Z_PaidLeave], T0.[U_Z_AnuLeave], T0.[U_Z_Contri], T0.[U_Z_AirAmt], T0.[U_Z_AcrAmt] ,T0.[U_Z_AcrAirAmt], T0.[U_Z_Cost], T0.[U_Z_NetSalary], T0.[U_Z_Startdate], T0.[U_Z_TermDate], T0.[U_Z_JVNo], T0.[U_Z_EOSYTD] ,T0.[U_Z_EOSBalance], T0.[U_Z_EOS],T0.[U_Z_InComeTax],T0.[U_Z_FAAmount],T0.[U_Z_MEAmount],T0.[U_Z_MEEAmount], T0.[U_Z_SpouseRebate] ,T0.[U_Z_ChileRebate], T0.[U_Z_CompNo], T0.[U_Z_Branch], T0.[U_Z_Dept] FROM [dbo].[@Z_PAYROLL1]  T0 where isnull(U_Z_OffCycle,'N')='N' and T0.U_Z_RefCode='" & strrefcode & "' and T0.U_Z_OnHold='" & strPostMethod & "'"
+                    strsql = "SELECT T0.[Code], T0.[Name], T0.[U_Z_RefCode], T0.[U_Z_PersonalID], T0.[U_Z_TANO] 'TANO', T0.[U_Z_empid], T0.[U_Z_EmpName], Case T0.U_Z_OnHold when 'H' then 'On Hold' else 'Active' end 'Status', T0.[U_Z_JobTitle], T0.[U_Z_Department], T0.[U_Z_TermName] 'Contract Term',T0.[U_Z_Basic], T0.[U_Z_InrAmt], T0.[U_Z_BasicSalary],t0.U_Z_MonthlyBasic 'Monthly Basic', T0.[U_Z_SalaryType], T0.[U_Z_CostCentre],T0.[U_Z_FEarning] 'Fixed Earnings',T0.[U_Z_VEarning] 'Variable Earnings', T0.[U_Z_AAllowance] 'Accrued Allowance', T0.[U_Z_Earning],T0.[U_Z_TDeduction] 'Taxable Deductions', T0.[U_Z_Deduction], T0.[U_Z_UnPaidLeave], T0.[U_Z_PaidLeave], T0.[U_Z_AnuLeave], T0.[U_Z_Contri], T0.[U_Z_AirAmt], T0.[U_Z_AcrAmt] ,T0.[U_Z_AcrAirAmt], T0.[U_Z_Cost], T0.[U_Z_NetSalary], T0.[U_Z_Startdate], T0.[U_Z_TermDate], T0.[U_Z_JVNo], T0.[U_Z_EOSYTD] ,T0.[U_Z_EOSBalance], T0.[U_Z_EOS],T0.[U_Z_InComeTax],T0.[U_Z_FAAmount],T0.[U_Z_MEAmount],T0.[U_Z_MEEAmount], T0.[U_Z_SpouseRebate] ,T0.[U_Z_ChileRebate], T0.[U_Z_CompNo], T0.[U_Z_Branch], T0.[U_Z_Dept] FROM [dbo].[@Z_PAYROLL1]  T0 where isnull(U_Z_OffCycle,'N')='N' and T0.U_Z_RefCode='" & strrefcode & "' and T0.U_Z_OnHold='" & strPostMethod & "'"
 
                     'oTempRec.DoQuery("SELECT T0.[empID], T0.[firstName]+T0.[LastName] 'Emplopyee name', T0.[jobTitle],T1.[Name], T0.[salary], T0.[salaryUnit], T2.[PrcName] FROM OHEM T0  INNER JOIN OUDP T1 ON T0.dept = T1.Code INNER JOIN OPRC T2 ON T0.U_Z_COST = T2.PrcCode")
                     oGrid.DataTable.ExecuteQuery(strsql)
@@ -1146,6 +1146,7 @@ Public Class clsPayrollGeneration
                                     End If
 
                                 End If
+                          
                             Case SAPbouiCOM.BoEventTypes.et_ITEM_PRESSED
                                 oForm = oApplication.SBO_Application.Forms.Item(FormUID)
                                 If pVal.ItemUID = "3" Then
@@ -1190,6 +1191,39 @@ Public Class clsPayrollGeneration
                             Case SAPbouiCOM.BoEventTypes.et_FORM_LOAD
                                 oForm = oApplication.SBO_Application.Forms.Item(FormUID)
                                 ' oItem = oApplication.Company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oItems)
+                            Case SAPbouiCOM.BoEventTypes.et_COMBO_SELECT
+                                oForm = oApplication.SBO_Application.Forms.Item(FormUID)
+                                If pVal.ItemUID = "9" Then
+                                    oCombobox = oForm.Items.Item("7").Specific
+                                    Dim intYear, intMOnth As Integer
+                                    Try
+                                        If oCombobox.Selected.Value = "" Then
+                                            intYear = 0
+                                        Else
+                                            intYear = oCombobox.Selected.Value
+                                        End If
+                                    Catch ex As Exception
+                                        intYear = 0
+                                    End Try
+                                    
+                                    oCombobox = oForm.Items.Item("9").Specific
+                                    Try
+                                        If oCombobox.Selected.Value = "" Then
+                                            intMOnth = 0
+                                        Else
+                                            intMOnth = oCombobox.Selected.Value
+                                        End If
+                                    Catch ex As Exception
+                                        intMOnth = 0
+                                    End Try
+                                    If intYear <> 0 And intMOnth <> 0 Then
+                                        Dim dtDate As New DateTime(intYear, intMOnth, DateTime.DaysInMonth(intYear, intMOnth))
+                                        oForm.Items.Item("26").Click(SAPbouiCOM.BoCellClickType.ct_Regular)
+                                        oApplication.Utilities.setEdittextvalue(oForm, "26", dtDate.ToString("yyyyMMdd"))
+                                        oApplication.SBO_Application.SendKeys("{TAB}")
+
+                                    End If
+                                End If
                             Case SAPbouiCOM.BoEventTypes.et_DOUBLE_CLICK
                                 oForm = oApplication.SBO_Application.Forms.Item(FormUID)
                                 If pVal.ItemUID = "10" And pVal.ColUID <> "RowsHeader" Then
