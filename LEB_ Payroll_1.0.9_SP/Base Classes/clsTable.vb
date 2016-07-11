@@ -892,26 +892,7 @@ Public NotInheritable Class clsTable
             AddFields("Z_PAY_BANK", "Z_AmtinWord", "Amount in Word Arabic", SAPbobsCOM.BoFieldTypes.db_Alpha, , 250)
 
 
-            'AddTables("Z_PAY_NSSFEOS", "NSSF and EOS Calculation", SAPbobsCOM.BoUTBTableType.bott_NoObject)
-            'AddFields("Z_PAY_NSSFEOS", "Z_RefCode", "Reference Code", SAPbobsCOM.BoFieldTypes.db_Alpha, , 8)
-            'AddFields("Z_PAY_NSSFEOS", "Z_empid", "Employee ID", SAPbobsCOM.BoFieldTypes.db_Numeric, , )
-            'AddFields("Z_PAY_NSSFEOS", "Z_Year", "Year", SAPbobsCOM.BoFieldTypes.db_Numeric)
-            'AddFields("Z_PAY_NSSFEOS", "Z_Month", "Month", SAPbobsCOM.BoFieldTypes.db_Numeric)
-            'AddFields("Z_PAY_NSSFEOS", "Z_Monthname", "Month Name", SAPbobsCOM.BoFieldTypes.db_Alpha, , 20)
-            'AddFields("Z_PAY_NSSFEOS", "Z_Fraction", "Number of Days", SAPbobsCOM.BoFieldTypes.db_Numeric)
-
-
-            'AddFields("Z_PAY_NSSFEOS", "Z_EOSEarning", "EOS Earning", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
-            'AddFields("Z_PAY_NSSFEOS", "Z_EOSDeduction", "EOS Deduction", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
-            'AddFields("Z_PAY_NSSFEOS", "Z_EOSAmount", "Total EOS Income", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
-            'AddFields("Z_PAY_NSSFEOS", "Z_EOS", "EOS Percentage", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Percentage)
-            'AddFields("Z_PAY_NSSFEOS", "Z_EOSMonthAmount", "EOS Benifit", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
-            'AddFields("Z_PAY_NSSFEOS", "Z_EOSYTD", "YTD EOS", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
-            'AddFields("Z_PAY_NSSFEOS", "Z_EOSBalance", "EOS Balance", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
-            'AddFields("Z_PAY_NSSFEOS", "Z_EOSAccPaid", "Acc. Contribution Paid to NSSF", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
-            'AddFields("Z_PAY_NSSFEOS", "Z_NoofYrs", "Year of Experience", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Quantity)
-            'AddFields("Z_PAY_NSSFEOS", "Z_EOSProvision", "EOS Provision", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
-
+            
             AddFields("OHEM", "Z_EOSBalance", "EOS Balance", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("OHEM", "Z_EOSBalanceDate", "EOS Balance celling date", SAPbobsCOM.BoFieldTypes.db_Date)
 
@@ -2125,7 +2106,10 @@ Public NotInheritable Class clsTable
             AddFields("Z_PAY_NSSFEOS", "Z_Earning", "Taxable Earning", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("Z_PAY_NSSFEOS", "Z_Deduction", "Taxable Deduction", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             '  AddFields("Z_PAY_NSSFEOS", "Z_Contribution", "Taxbale Contribution", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAY_NSSFEOS", "Z_FAMONFACelling", "Monthly FA Allowance celling", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAY_NSSFEOS", "Z_MONHCellings", "MOnthly Hospital Ceilling", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
 
+            'U_Z_YTDHCellings
             AddFields("Z_PAY_NSSFEOS", "Z_FAYTDFACelling", "YTD FA Allowance celling", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("Z_PAY_NSSFEOS", "Z_FAMonthlyIncome", "Monthly FA Allowance Income", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("Z_PAY_NSSFEOS", "Z_YTDFIncome", "YTD Family Allowance Income", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
@@ -2136,6 +2120,7 @@ Public NotInheritable Class clsTable
 
 
             AddFields("Z_PAY_NSSFEOS", "Z_EOSEarning", "EOS Earning", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAY_NSSFEOS", "Z_EOSEarn_Cum", "EOS Cummulative Earning", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("Z_PAY_NSSFEOS", "Z_EOSDeduction", "EOS Deduction", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("Z_PAY_NSSFEOS", "Z_EOSAmount", "Total EOS Income", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("Z_PAY_NSSFEOS", "Z_EOS", "EOS Percentage", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Percentage)
@@ -2145,6 +2130,14 @@ Public NotInheritable Class clsTable
             AddFields("Z_PAY_NSSFEOS", "Z_EOSAccPaid", "Acc. Contribution Paid to NSSF", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("Z_PAY_NSSFEOS", "Z_NoofYrs", "Year of Experience", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Quantity)
             AddFields("Z_PAY_NSSFEOS", "Z_EOSProvision", "EOS Provision", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+
+            'EOS Provision Posting 2016-07-08
+            AddFields("Z_PAY_NSSFEOS", "Z_EOSDue", "EOS Due", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAY_NSSFEOS", "Z_EOSPro", "EOS Provision", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAY_NSSFEOS", "Z_EOSProPosting", "EOS Provision Posting Amount", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAYROLL1", "Z_EOSProDue", "EOS Provision Posting", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
+            AddFields("Z_PAY_TAX", "Z_EOSProMonth", "EOS Provison calculation Month", SAPbobsCOM.BoFieldTypes.db_Numeric)
+            'EOS Provision Posting 2016-07-08
 
             AddFields("OHEM", "Z_EOSBalance", "EOS Balance", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)
             AddFields("OHEM", "Z_EOSBalanceDate", "EOS Balance celling date", SAPbobsCOM.BoFieldTypes.db_Date)
@@ -2619,6 +2612,7 @@ Public NotInheritable Class clsTable
             AddFields("Z_PAY_LOAN", "Z_FrgnName", "Second Language Name", SAPbobsCOM.BoFieldTypes.db_Alpha, , 200)
 
             addField("@Z_PAY_TAX", "Z_TaxPro", "Prorated Tax Exemption", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
+            addField("@Z_PAY_TAX", "Z_NSSFMonth", "Monthly NSSF Calculation", SAPbobsCOM.BoFieldTypes.db_Alpha, 1, SAPbobsCOM.BoFldSubTypes.st_Address, "Y,N", "Yes,No", "N")
 
             'field additions 2016-05-20
             AddFields("Z_PAYROLL1", "Z_FEarning", "Fixed Earnings", SAPbobsCOM.BoFieldTypes.db_Float, , , SAPbobsCOM.BoFldSubTypes.st_Sum)

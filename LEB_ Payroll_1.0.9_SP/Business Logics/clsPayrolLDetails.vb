@@ -177,7 +177,7 @@ Public Class clsPayrolLDetails
                 oGrid = aform.Items.Item("7").Specific
                 ' oGrid.DataTable.ExecuteQuery("Select  U_Z_BasicSalary,U_Z_Earning,U_Z_Deduction,U_Z_UnPaidLeave,U_Z_PaidLeave,U_Z_AnuLeave,U_Z_Contri,U_Z_Cost,U_Z_NetSalary,U_Z_AirAmt from [@Z_Payroll1] where code='" & aCode & "'")
                 Dim s As String
-                s = "Select  ""U_Z_MonthlyBasic"",""U_Z_Earning"",""U_Z_Deduction"",""U_Z_UnPaidLeave"",""U_Z_PaidLeave"",""U_Z_AnuLeave"",""U_Z_CashOutAmt"",""U_Z_Contri"",""U_Z_AirAmt"", ""U_Z_NetPayAmt"",""U_Z_CmpPayAmt"", ""U_Z_IncomeTax"",""U_Z_MEAmount"",""U_Z_SpouseRebate"",""U_Z_ChileRebate"",""U_Z_Cost"",""U_Z_NetSalary"",""Code"",T0.""U_Z_EOS1"",T0.""U_Z_Leave"",T0.""U_Z_Ticket"",T0.""U_Z_Saving"" ,T0.""U_Z_PaidExtraSalary""  from [@Z_Payroll1] T0 where code='" & aCode & "'"
+                s = "Select  ""U_Z_MonthlyBasic"",""U_Z_Earning"",""U_Z_Deduction"",""U_Z_UnPaidLeave"",""U_Z_PaidLeave"",""U_Z_AnuLeave"",""U_Z_CashOutAmt"",""U_Z_Contri"",""U_Z_AirAmt"", ""U_Z_NetPayAmt"",""U_Z_CmpPayAmt"", ""U_Z_IncomeTax"",""U_Z_MEAmount"",""U_Z_SpouseRebate"",""U_Z_ChileRebate"",""U_Z_Cost"",""U_Z_NetSalary"",""Code"",T0.""U_Z_EOS1"",T0.""U_Z_Leave"",T0.""U_Z_Ticket"",T0.""U_Z_Saving"" ,T0.""U_Z_PaidExtraSalary"",T0.""U_Z_EOSProDue"" ""EOS Provision Amount""  from [@Z_Payroll1] T0 where code='" & aCode & "'"
                 oGrid.DataTable.ExecuteQuery(s)
                 oGrid = aform.Items.Item("11").Specific
                 oGrid.DataTable.ExecuteQuery("Select * from [@Z_PAYROLL2] where U_Z_RefCode='" & aCode & "' and (""U_Z_Type""<>'B' and ""U_Z_TYPE""<>'F'and ""U_Z_TYPE""<>'E')")
@@ -272,9 +272,9 @@ Public Class clsPayrolLDetails
 
                 oGrid = aform.Items.Item("grdNSSF").Specific 'NSSF
                 strstring = "SELECT T0.[U_Z_Year] 'Year', T0.[U_Z_Monthname] 'Month', T0.[U_Z_Fraction] 'Fraction',"
-                strstring = strstring & "  T0.[U_Z_FAYTDFACelling] ' FA Celling (YTD)', T0.[U_Z_FAMonthlyIncome] 'Monthly Income', T0.[U_Z_YTDFIncome] 'Cumulative Income'"
+                strstring = strstring & " T0.[U_Z_FAMONFACelling] ' FA Celling(Monthly)', T0.[U_Z_FAYTDFACelling] ' FA Celling (YTD)', T0.[U_Z_FAMonthlyIncome] 'Monthly Income', T0.[U_Z_YTDFIncome] 'Cumulative Income'"
                 strstring = strstring & ", T0.[U_Z_NSSFFamily] 'FA Percentage', T0.[U_Z_NSSFFamilyAmount] 'FA Benifit', T0.[U_Z_YTDFA] 'FA YTD Benifit', "
-                strstring = strstring & "T0.[U_Z_YTDHCellings] 'Medical Celling (YTD)',"
+                strstring = strstring & "T0.[U_Z_MONHCellings] 'Medical Celling (Monthly)',T0.[U_Z_YTDHCellings] 'Medical Celling (YTD)',"
                 strstring = strstring & "T0.[U_Z_NSSFHospital] 'ME Employee Percentage', T0.[U_Z_NSSFHosAmount] 'ME Employee Benifit',"
                 strstring = strstring & "T0.[U_Z_NSSFHYTD] 'ME YTD Benifit', T0.[U_Z_NSSFHospitalEMP] 'ME Employeer Percentage', "
                 strstring = strstring & "T0.[U_Z_NSSFHosAmountEMP] 'ME Employeer Benifit', T0.[U_Z_NSSFHEYTD] 'ME Employeer YTD Benifit' FROM [dbo].[@Z_PAY_NSSFEOS]  T0"
@@ -285,10 +285,12 @@ Public Class clsPayrolLDetails
                 oGrid = aform.Items.Item("26").Specific
                 oApplication.Utilities.assignMatrixLineno(oGrid, aform)
                 strstring = "SELECT T0.[U_Z_Year] 'Year', T0.[U_Z_Monthname] 'Month', T0.[U_Z_Fraction] 'Fraction', T0.[U_Z_Basic] 'Basic',"
-                strstring = strstring & "   T0.[U_Z_EOSEarning] 'Earning', T0.[U_Z_EOSDeduction] 'Deduction',T0.[U_Z_LEAVEAMOUNT] 'Leave Deduction',T0.[U_Z_CONAMOUNT] 'Contribution', T0.[U_Z_EOSAmount] 'Total EOS Eligble',"
-                strstring = strstring & "  T0.[U_Z_EOS] 'EOS Percentage', T0.[U_Z_EOSMonthAmount] 'Monthly EOS', T0.[U_Z_EOSYTD] 'YTD EOS',T0.[U_Z_EOSBalance] 'EOS Balance',T0.[U_Z_EOSAccPaid] 'Accumulated Contribution Paid to NSSF',T0.[U_Z_NoofYrs] 'Years on Experiance',T0.[U_Z_EOSProvision] 'EOS Provision' FROM [dbo].[@Z_PAY_NSSFEOS]  T0"
+                strstring = strstring & "   T0.[U_Z_EOSEarning] 'Earning', T0.[U_Z_EOSDeduction] 'Deduction',T0.[U_Z_LEAVEAMOUNT] 'Leave Deduction',T0.[U_Z_CONAMOUNT] 'Contribution', T0.[U_Z_EOSAmount] 'Total Monthly EOS Eligible',T0.[U_Z_EOSEarn_Cum] 'Cummulative EOS Eligible',"
+                strstring = strstring & "  T0.[U_Z_EOS] 'EOS Percentage', T0.[U_Z_EOSMonthAmount] 'Monthly EOS', T0.[U_Z_EOSYTD] 'YTD EOS',T0.[U_Z_EOSBalance] 'EOS Balance',T0.[U_Z_EOSAccPaid] 'Accumulated Contribution Paid to NSSF',T0.[U_Z_NoofYrs] 'Years on Experiance',T0.[U_Z_EOSProvision] 'EOS Provision',T0.[U_Z_EOSDue] 'EOS Due (8.5%)',T0.[U_Z_EOSPro] 'EOS Provision Calculation (8%)',T0.[U_Z_EOSProPosting] 'EOS Provision Posting' FROM [dbo].[@Z_PAY_NSSFEOS]  T0"
                 strstring = strstring & "  where T0.U_Z_Year=" & intyear & " and  T0.U_Z_EMPID='" & stEmpID & "'  order by U_Z_Year,U_Z_Month"
                 oGrid.DataTable.ExecuteQuery(strstring)
+                oGrid.Columns.Item("EOS Provision").Visible = False
+                oGrid.Columns.Item("Accumulated Contribution Paid to NSSF").Visible = False
                 oGrid.AutoResizeColumns()
 
                 ''End TAX and NSSF

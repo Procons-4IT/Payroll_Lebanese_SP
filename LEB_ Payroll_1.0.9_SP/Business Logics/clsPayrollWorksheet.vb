@@ -313,9 +313,9 @@ Public Class clsPayrollWorksheet
 
             oPayrec.DoQuery("Select * from [@Z_PAYROLL] where isnull(U_Z_OffCycle,'N')='N' and U_Z_CompNo='" & strCompany & "'  and U_Z_YEAR=" & intYear & " and U_Z_MONTH >" & intMonth)
             If oPayrec.RecordCount > 0 Then
-                oApplication.Utilities.Message("Payroll already generated for Next Period. You can not generate the payroll for this selected period.", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
-                aForm.Freeze(False)
-                Return False
+                ' oApplication.Utilities.Message("Payroll already generated for Next Period. You can not generate the payroll for this selected period.", SAPbouiCOM.BoStatusBarMessageType.smt_Error)
+                ' aForm.Freeze(False)
+                '  Return False
             End If
             If oApplication.SBO_Application.MessageBox("Confirm whether the T&A details are imported and approved correctly ?", , "Confirm", "Cancel") = 2 Then
                 aForm.Freeze(False)
@@ -1651,6 +1651,15 @@ Public Class clsPayrollWorksheet
                         '  intNumberofWorkingDays = intNumberofWorkingDays - (IntCaldenerDays - dblNoofDaysfromSEtup)
                     Else
                         If aMonth = 2 Then
+                            'If Year(dtStartdate) = ayear And Month(dtStartdate) = aMonth Then
+                            '    If dtStartdate.Day = 1 Then
+                            '        intNumberofWorkingDays = dblNoofDaysfromSEtup
+                            '    End If
+                            'Else
+                            '    If dblNoofDaysfromSEtup > IntCaldenerDays Then
+                            '        dblNoofDaysfromSEtup = IntCaldenerDays
+                            '    End If
+                            'End If
                             If dblNoofDaysfromSEtup > IntCaldenerDays Then
                                 dblNoofDaysfromSEtup = IntCaldenerDays
                             End If
@@ -1668,9 +1677,23 @@ Public Class clsPayrollWorksheet
                     intNumberofWorkingDays = intNumberofWorkingDays + dblWorkingDaysfromAnnualLeave
                     'End New Change 
                     If intMonth = 2 Then
-                        If dblNoofDaysfromSEtup >= DateTime.DaysInMonth(intYear, intMonth) Then
-                            dblNoofDaysfromSEtup = DateTime.DaysInMonth(intYear, intMonth)
+                        If blnCurrentMonth = True Then
+                            If (Year(dtStartdate) = ayear And Month(dtStartdate) = aMonth) Then
+                                If dtStartdate.Day = 1 Then
+                                    intNumberofWorkingDays = dblNoofDaysfromSEtup
+                                Else
+                                    dblNoofDaysfromSEtup = dblNoofDaysfromSEtup
+                                End If
+
+                            End If
+                        Else
+                            If dblNoofDaysfromSEtup >= DateTime.DaysInMonth(intYear, intMonth) Then
+                                dblNoofDaysfromSEtup = DateTime.DaysInMonth(intYear, intMonth)
+                            End If
                         End If
+                        'If dblNoofDaysfromSEtup >= DateTime.DaysInMonth(intYear, intMonth) Then
+                        '    dblNoofDaysfromSEtup = DateTime.DaysInMonth(intYear, intMonth)
+                        'End If
                     End If
                     If blnReJoinCycle = False Then
                         If dblannualleavedays > 0 Then

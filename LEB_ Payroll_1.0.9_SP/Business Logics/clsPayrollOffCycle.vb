@@ -1326,9 +1326,18 @@ Public Class clsPayrollOffCycle
                     dblWeekEnds = oApplication.Utilities.getHolidayCount(strempID, "W", dtstarda, dtEndDa)
 
                     If intMonth = 2 Then
-                        If dblOffCycleCalenderdays >= DateTime.DaysInMonth(intYear, intMonth) Then
-                            dblOffCycleCalenderdays = DateTime.DaysInMonth(intYear, intMonth)
+                        If blnTermination = True Then
+                            If dtEndDa.Day = DateTime.DaysInMonth(intYear, intMonth) Then
+                                dblOffCycleCalenderdays = DateTime.DaysInMonth(intYear, intMonth)
+                            Else
+                                dblOffCycleCalenderdays = dblOffCycleCalenderdays
+                            End If
+                        Else
+
                         End If
+                        'If dblOffCycleCalenderdays >= DateTime.DaysInMonth(intYear, intMonth) Then
+                        '    dblOffCycleCalenderdays = DateTime.DaysInMonth(intYear, intMonth)
+                        'End If
                     End If
 
                     If intNumberofWorkingDays > dblOffCycleCalenderdays Then
